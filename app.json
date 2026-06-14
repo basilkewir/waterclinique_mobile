@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "etap-connect-mobile",
-    "slug": "etap-connect-mobile",
+    "name": "Water Cliniq",
+    "slug": "etap",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -9,7 +9,14 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Water Cliniq uses your camera to photograph water samples for AI analysis and safety assessment.",
+        "NSPhotoLibraryUsageDescription": "Water Cliniq accesses your photo library to analyse water sample images you have already taken.",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": false
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -18,8 +25,10 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "edgeToEdgeEnabled": false,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.kewirdev.watercliniq",
+      "permissions": ["CAMERA", "INTERNET", "READ_EXTERNAL_STORAGE"]
     },
     "web": {
       "output": "static",
@@ -27,6 +36,19 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Water Cliniq needs camera access to photograph your water sample for AI safety analysis."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {},
+          "ios": {}
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -38,11 +60,18 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "83bf62dc-6f44-4071-bb9c-1a7a5141875c"
+      }
     }
   }
 }
